@@ -23,12 +23,13 @@ func main() {
 	service := service.NewService(repo)
 	sec := security.NewSecurity() // Add e.g. MongoDB client
 
-	router.GET("/login", sec.BasicAuthPermission())
+	//router.GET("/login", sec.BasicAuthPermission())
 	//Example GET
-	router.GET("/allSpots", service.GetAllSpots)
+	router.GET("/allSpots", service.GetAllSpots, sec.BasicAuthPermission())
 
 	//Example POST
-	router.POST("/test", sec.ValidateAPIKey(), service.GetAlbums)
+	router.POST("/login", service.CheckLogin, sec.BasicAuthPermission())
+	//router.POST("/test", sec.ValidateAPIKey(), service.GetAlbums)
 
 	router.Run("localhost:8080")
 

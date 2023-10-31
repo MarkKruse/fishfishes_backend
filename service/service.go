@@ -9,6 +9,7 @@ import (
 
 type Repo interface {
 	GetAllSpots(string) common.Fish_spots
+	CheckLogin(user common.User) bool
 }
 
 type Service struct {

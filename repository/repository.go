@@ -1,9 +1,19 @@
 package repository
 
 import (
+	"context"
 	common "fishfishes_backend/common"
-	log "github.com/sirupsen/logrus"
+	"fishfishes_backend/common/mongo"
+	"fmt"
+	"go.mongodb.org/mongo-driver/bson"
 )
+
+type SpotEntity struct {
+	UserId string           `bson:"_id"`
+	Spot   common.Fish_spot `bson:"spot"`
+}
+
+const Spot string = "spot"
 
 // albums slice to seed record album data.
 var spots = common.Fish_spots{
@@ -42,13 +52,40 @@ var spots = common.Fish_spots{
 }
 
 type Repo struct {
+	db *mongo.Database
 }
 
-func NewRepo() Repo {
-	return Repo{}
+func NewRepo(db *mongo.Database) Repo {
+	return Repo{
+		db: db,
+	}
 }
 
-func (r Repo) GetAllSpots(id string) common.Fish_spots {
-	log.Infof("User: %s", id)
+func (r Repo) GetAllSpots(ctx context.Context, id string) common.Fish_spots {
+
+	filter := bson.D{
+		{
+			Key:   "_id",
+			Value: fmt.Sprintf("%s_%s_%s", id),
+		},
+	}
+
+	r.db.Database.Collection(Spot).Find(ctx, filter)
+
 	return spots
+}
+
+func (r Repo) SaveSpot(ctx context.Context, userId string, spot common.Fish_spot) error {
+
+	spotEntity := SpotEntity{
+		UserId: userId,
+		Spot:   spot,
+	}
+
+	_, err := r.db.Database.Collection(Spot).InsertOne(ctx, spotEntity)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

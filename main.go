@@ -1,10 +1,15 @@
 package main
 
 import (
+	"context"
+	"fishfishes_backend/common/mongo"
+	"fishfishes_backend/configuration"
 	repo "fishfishes_backend/repository"
-	security "fishfishes_backend/security"
-	service "fishfishes_backend/service"
+	"fishfishes_backend/security"
+	"fishfishes_backend/service"
 	"github.com/gin-gonic/gin"
+	"go.uber.org/zap"
+	"os"
 )
 
 // ------------Security------------
@@ -13,24 +18,43 @@ import (
 // --------------------------------
 
 func main() {
+	ctx := context.Background()
+
+	logger, _ := zap.NewProduction()
+	defer logger.Sync()
+	sugar := logger.Sugar()
 
 	router := gin.Default()
-	gin.SetMode(gin.DebugMode)
 
+	config := configuration.NewServiceConfiguration()
+	config.ServiceFlags()
 	//Create MongoDB Client
+	dbClient, err := mongo.NewMongoDatabase(&config.DB, sugar)
+	if err != nil {
+		os.Exit(1)
+		return
+	}
 
-	repo := repo.NewRepo()
-	service := service.NewService(repo)
+	err = dbClient.Connect(ctx)
+	if err != nil {
+		os.Exit(1)
+		return
+	}
+
+	repository := repo.NewRepo(dbClient)
+	service := service.NewService(repository)
 	sec := security.NewSecurity() // Add e.g. MongoDB client
 
 	//router.GET("/login", sec.BasicAuthPermission())
 	//Example GET
-	router.GET("/allSpots", service.GetAllSpots, sec.BasicAuthPermission())
+	router.GET("/getAllSpots", service.GetAllSpots, sec.ValidateAPIKey())
+	router.GET("/getSpotByID", service.GetSpotByID, sec.ValidateAPIKey())
+	router.PUT("/saveSpot", service.SaveSpot, sec.ValidateAPIKey())
 
 	//Example POST
-	router.POST("/login", service.CheckLogin, sec.BasicAuthPermission())
-	//router.POST("/test", sec.ValidateAPIKey(), service.GetAlbums)
+	router.POST("/login", service.CheckLogin, sec.ValidateAPIKey())
 
-	router.Run("localhost:8080")
+	router.PUT("/regist", service.CreateAccount, sec.ValidateAPIKey())
 
+	router.Run("localhost:8086")
 }

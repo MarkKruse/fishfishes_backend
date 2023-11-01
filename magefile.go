@@ -5,6 +5,8 @@ package main
 
 import (
 	"github.com/magefile/mage/mg" // mg contains helpful utility functions, like Deps
+	"os"
+	"os/exec"
 )
 
 import "fishfishes_backend/build"

@@ -5,30 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fffba33d-8984-46ad-ad61-d50be63de5bc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/go.imports.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/common/marker.go" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uploadToGCP.sh" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/fish_spot.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/fish_spot.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/mongo/config_test.go" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/common/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/user.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/configuration/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/configuration/service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/env" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repository/account.go" beforeDir="false" afterPath="$PROJECT_DIR$/repository/account.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/repository/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/repository/repository.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/security/api_key.go" beforeDir="false" afterPath="$PROJECT_DIR$/security/api_key.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/security/security.go" beforeDir="false" afterPath="$PROJECT_DIR$/security/security.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/service/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/service.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ff-darwin-amd64" beforeDir="false" afterPath="$PROJECT_DIR$/target/ff-darwin-amd64" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ff-linux-amd64" beforeDir="false" afterPath="$PROJECT_DIR$/target/ff-linux-amd64" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/ff-windows-amd64.exe" beforeDir="false" afterPath="$PROJECT_DIR$/target/ff-windows-amd64.exe" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,7 +106,7 @@
       <workItem from="1698776439982" duration="3077000" />
       <workItem from="1698915342075" duration="15692000" />
       <workItem from="1699274998912" duration="799000" />
-      <workItem from="1699349531809" duration="9770000" />
+      <workItem from="1699349531809" duration="10117000" />
     </task>
     <servers />
   </component>

@@ -67,16 +67,14 @@ func main() {
 	router.UseH2C = true
 	// Add routes
 	router.GET("/version", sec.ValidateAPIKey(), service.Version)
-	//Example GET
 	router.GET("/getAllSpots", sec.ValidateAPIKey(), service.GetAllSpots)
 	router.GET("/getSpotByID", sec.ValidateAPIKey(), service.GetSpotByID)
 	router.GET("/getMarkers", sec.ValidateAPIKey(), service.GetAllSpotCoordinates)
-	router.PUT("/saveSpot", sec.ValidateAPIKey(), service.SaveSpot)
 
-	//Example POST
 	router.POST("/login", sec.ValidateAPIKey(), service.CheckLogin)
 
 	router.PUT("/regist", sec.ValidateAPIKey(), service.CreateAccount)
+	router.PUT("/saveSpot", sec.ValidateAPIKey(), service.SaveSpot)
 
 	router.Run(":8080")
 }

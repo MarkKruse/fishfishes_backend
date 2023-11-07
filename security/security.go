@@ -1,9 +1,11 @@
 package security
 
 type Security struct {
-	//MongoDB client
+	APIKey string
 }
 
-func NewSecurity() Security {
-	return Security{}
+func NewSecurity(apiKey string) Security {
+	return Security{
+		APIKey: apiKey,
+	}
 }

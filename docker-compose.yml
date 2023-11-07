@@ -6,8 +6,7 @@ services:
     build:
       dockerfile: Dockerfile
     labels:
-      - traefik.enabled=true
-      - traefik.http.routers.ff.rule=Host(`ff.${DOCKER_HOST:-localhost}`)
+      - traefik.http.routers.sdss.rule=Host(`sdss.${DOCKER_HOST:-localhost}`)
 
 networks:
   default:

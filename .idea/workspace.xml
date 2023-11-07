@@ -5,7 +5,30 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fffba33d-8984-46ad-ad61-d50be63de5bc" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/common/fish_spot.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.env" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/go.imports.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/common/marker.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uploadToGCP.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/fish_spot.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/fish_spot.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/mongo/config_test.go" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/user.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/user.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configuration/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/configuration/service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docker-compose.yml" beforeDir="false" afterPath="$PROJECT_DIR$/docker-compose.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/env" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.sum" beforeDir="false" afterPath="$PROJECT_DIR$/go.sum" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repository/account.go" beforeDir="false" afterPath="$PROJECT_DIR$/repository/account.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repository/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/repository/repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/security/api_key.go" beforeDir="false" afterPath="$PROJECT_DIR$/security/api_key.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/security/security.go" beforeDir="false" afterPath="$PROJECT_DIR$/security/security.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ff-darwin-amd64" beforeDir="false" afterPath="$PROJECT_DIR$/target/ff-darwin-amd64" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ff-linux-amd64" beforeDir="false" afterPath="$PROJECT_DIR$/target/ff-linux-amd64" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ff-windows-amd64.exe" beforeDir="false" afterPath="$PROJECT_DIR$/target/ff-windows-amd64.exe" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +61,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.go.formatter.settings.were.checked": "true",
     "RunOnceActivity.go.migrated.go.modules.settings": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
     "dart.analysis.tool.window.visible": "false",
     "go.import.settings.migrated": "true",
@@ -49,25 +73,29 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/docker" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration default="true" type="GoApplicationRunConfiguration" factoryName="Go Application">
+  <component name="RunManager" selected="Go Build.go build fishfishes_backend">
+    <configuration name="go build fishfishes_backend" type="GoApplicationRunConfiguration" factoryName="Go Application" nameIsGenerated="true">
       <module name="fishfishes_backend" />
       <working_directory value="$PROJECT_DIR$" />
-      <kind value="FILE" />
+      <parameters value="--mongo.uri=mongodb+srv://markkruse92:SZ9WuHjDrr4KgcoP@fishfishescluster.byjsxja.mongodb.net/?retryWrites=true --mongo.database=fishfishes --backendAPIKey=1234 --pathServerPem=$PROJECT_DIR$/docker/server.pem --pathServerKey=$PROJECT_DIR$/docker/server.key" />
+      <EXTENSION ID="net.ashald.envfile">
+        <option name="IS_ENABLED" value="false" />
+        <option name="IS_SUBST" value="false" />
+        <option name="IS_PATH_MACRO_SUPPORTED" value="false" />
+        <option name="IS_IGNORE_MISSING_FILES" value="false" />
+        <option name="IS_ENABLE_EXPERIMENTAL_INTEGRATIONS" value="false" />
+        <ENTRIES>
+          <ENTRY IS_ENABLED="true" PARSER="runconfig" IS_EXECUTABLE="false" />
+        </ENTRIES>
+      </EXTENSION>
+      <kind value="PACKAGE" />
+      <package value="fishfishes_backend" />
       <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <method v="2" />
-    </configuration>
-    <configuration default="true" type="GoTestRunConfiguration" factoryName="Go Test">
-      <module name="fishfishes_backend" />
-      <working_directory value="$PROJECT_DIR$" />
-      <kind value="DIRECTORY" />
-      <directory value="$PROJECT_DIR$" />
-      <filePath value="$PROJECT_DIR$" />
-      <framework value="gotest" />
+      <filePath value="$PROJECT_DIR$/main.go" />
       <method v="2" />
     </configuration>
     <configuration name="Dockerfile" type="docker-deploy" factoryName="dockerfile" temporary="true" server-name="Docker">
@@ -78,6 +106,10 @@
       </deployment>
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Docker.Dockerfile" />
+      <item itemvalue="Go Build.go build fishfishes_backend" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Docker.Dockerfile" />
@@ -93,6 +125,9 @@
       <option name="presentableId" value="Default" />
       <updated>1698776437834</updated>
       <workItem from="1698776439982" duration="3077000" />
+      <workItem from="1698915342075" duration="15692000" />
+      <workItem from="1699274998912" duration="799000" />
+      <workItem from="1699349531809" duration="9770000" />
     </task>
     <servers />
   </component>
@@ -112,5 +147,21 @@
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/service/service.go</url>
+          <line>99</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
+          <url>file://$PROJECT_DIR$/main.go</url>
+          <line>42</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

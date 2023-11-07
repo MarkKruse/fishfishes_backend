@@ -7,7 +7,10 @@ import (
 	repo "fishfishes_backend/repository"
 	"fishfishes_backend/security"
 	"fishfishes_backend/service"
+	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/joho/godotenv"
+	log "github.com/sirupsen/logrus"
 	"go.uber.org/zap"
 	"os"
 )
@@ -17,17 +20,25 @@ import (
 // security.ValidateAPIKey()      |
 // --------------------------------
 
+// Init is called right on top of main
+func init() {
+	// Loads the .env file using godotenv.
+	// Throws an error is the file cannot be found.
+	if err := godotenv.Load(".env"); err != nil {
+		log.Print("No .env file found")
+	}
+}
+
 func main() {
+
 	ctx := context.Background()
 
 	logger, _ := zap.NewProduction()
 	defer logger.Sync()
 	sugar := logger.Sugar()
 
-	router := gin.Default()
+	config := configuration.NewServiceConfiguration(os.Getenv("MONGOURI"), os.Getenv("MONGODATABASE"), os.Getenv("BACKENDAPIKEY"))
 
-	config := configuration.NewServiceConfiguration()
-	config.ServiceFlags()
 	//Create MongoDB Client
 	dbClient, err := mongo.NewMongoDatabase(&config.DB, sugar)
 	if err != nil {
@@ -42,19 +53,30 @@ func main() {
 	}
 
 	repository := repo.NewRepo(dbClient)
-	service := service.NewService(repository)
-	sec := security.NewSecurity() // Add e.g. MongoDB client
+	err = repository.InstallIndexes()
+	if err != nil {
+		logger.Error(fmt.Sprintf("error installing indexes error:%s", err.Error()))
+		os.Exit(1)
+		return
+	}
 
-	//router.GET("/login", sec.BasicAuthPermission())
+	service := service.NewService(repository)
+	sec := security.NewSecurity(config.BackendAPIKey) // Add e.g. MongoDB client
+
+	router := gin.Default()
+	router.UseH2C = true
+	// Add routes
+	router.GET("/version", sec.ValidateAPIKey(), service.Version)
 	//Example GET
-	router.GET("/getAllSpots", service.GetAllSpots, sec.ValidateAPIKey())
-	router.GET("/getSpotByID", service.GetSpotByID, sec.ValidateAPIKey())
-	router.PUT("/saveSpot", service.SaveSpot, sec.ValidateAPIKey())
+	router.GET("/getAllSpots", sec.ValidateAPIKey(), service.GetAllSpots)
+	router.GET("/getSpotByID", sec.ValidateAPIKey(), service.GetSpotByID)
+	router.GET("/getMarkers", sec.ValidateAPIKey(), service.GetAllSpotCoordinates)
+	router.PUT("/saveSpot", sec.ValidateAPIKey(), service.SaveSpot)
 
 	//Example POST
-	router.POST("/login", service.CheckLogin, sec.ValidateAPIKey())
+	router.POST("/login", sec.ValidateAPIKey(), service.CheckLogin)
 
-	router.PUT("/regist", service.CreateAccount, sec.ValidateAPIKey())
+	router.PUT("/regist", sec.ValidateAPIKey(), service.CreateAccount)
 
-	router.Run("localhost:8086")
+	router.Run(":8080")
 }

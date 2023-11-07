@@ -5,11 +5,14 @@ import (
 	common "fishfishes_backend/common"
 	"fishfishes_backend/common/mongo"
 	"fmt"
+	"github.com/google/uuid"
 	"go.mongodb.org/mongo-driver/bson"
+	mongoClient "go.mongodb.org/mongo-driver/mongo"
 )
 
 type SpotEntity struct {
-	UserId string           `bson:"_id"`
+	Id     string           `bson:"_id"`
+	UserId string           `bson:"userId"`
 	Spot   common.Fish_spot `bson:"spot"`
 }
 
@@ -19,9 +22,14 @@ const Spot string = "spot"
 var spots = common.Fish_spots{
 	Fish_spots: []common.Fish_spot{
 		{
-			ID:  "12345",
-			LAT: 54.110943,
-			LNG: 6.713647,
+			Id: "12345",
+			Marker: common.Marker{
+				Title: "title1",
+				Coordinates: common.Coordinates{
+					Latitude:  54.110943,
+					Longitude: 6.713647,
+				},
+			},
 			Catches: []common.Catch{
 				{
 					Fish:      "",
@@ -34,9 +42,14 @@ var spots = common.Fish_spots{
 			},
 		},
 		{
-			ID:  "12345",
-			LAT: 55.078367,
-			LNG: 7.809639,
+			Id: "12345",
+			Marker: common.Marker{
+				Title: "title2",
+				Coordinates: common.Coordinates{
+					Latitude:  55.078367,
+					Longitude: 7.809639,
+				},
+			},
 			Catches: []common.Catch{
 				{
 					Fish:      "",
@@ -61,23 +74,58 @@ func NewRepo(db *mongo.Database) Repo {
 	}
 }
 
-func (r Repo) GetAllSpots(ctx context.Context, id string) common.Fish_spots {
+func (r Repo) InstallIndexes() error {
+
+	//err := r.db.InstallIndex(Spot, "spot_idx", bson.D{
+	//	{Key: "_id", Value: 1},
+	//})
+	//if err != nil {
+	//	return err
+	//}
+
+	return nil
+}
+
+func (r Repo) GetAllSpots(ctx context.Context, id string) (*[]common.Fish_spot, error) {
 
 	filter := bson.D{
 		{
-			Key:   "_id",
-			Value: fmt.Sprintf("%s_%s_%s", id),
+			Key:   "userId",
+			Value: fmt.Sprintf("%s", id),
 		},
 	}
 
-	r.db.Database.Collection(Spot).Find(ctx, filter)
+	cur, err := r.db.Database.Collection(Spot).Find(ctx, filter)
+	if err != nil {
+		if err == mongoClient.ErrNoDocuments {
+			return nil, nil
+		}
+		return nil, err
+	}
 
-	return spots
+	defer mongo.CloseCursor(cur, ctx)
+
+	var entities []common.Fish_spot
+
+	for cur.Next(ctx) {
+		var entity SpotEntity
+		err := cur.Decode(&entity)
+		if err != nil {
+			if err == mongoClient.ErrNoDocuments {
+				return nil, nil
+			}
+			return nil, err
+		}
+		entities = append(entities, entity.Spot)
+	}
+
+	return &entities, nil
 }
 
 func (r Repo) SaveSpot(ctx context.Context, userId string, spot common.Fish_spot) error {
 
 	spotEntity := SpotEntity{
+		Id:     uuid.New().String(),
 		UserId: userId,
 		Spot:   spot,
 	}

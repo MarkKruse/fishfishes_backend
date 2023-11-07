@@ -10,11 +10,13 @@ import (
 )
 
 type Repo interface {
-	GetAllSpots(ctx context.Context, id string) common.Fish_spots
 	CheckLogin(ctx context.Context, user common.User) (bool, string)
 	CreateAccount(ctx context.Context, user common.User) error
 	SaveSpot(ctx context.Context, userId string, spot common.Fish_spot) error
+	GetAllSpots(ctx context.Context, id string) (*[]common.Fish_spot, error)
 }
+
+const VERSION string = "0.0.1"
 
 type Service struct {
 	Repo Repo
@@ -26,14 +28,43 @@ func NewService(repo Repo) Service {
 	}
 }
 
+func (s Service) Version(c *gin.Context) {
+
+	c.IndentedJSON(http.StatusOK, VERSION)
+}
+
 func (s Service) GetAllSpots(c *gin.Context) {
 	id := c.Query("userId")
 	if len(id) == 0 {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Found no userID"})
 		return
 	}
-	spots := s.Repo.GetAllSpots(c, id)
+	spots, err := s.Repo.GetAllSpots(c, id)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
 	c.IndentedJSON(http.StatusOK, spots)
+}
+
+func (s Service) GetAllSpotCoordinates(c *gin.Context) {
+	id := c.Query("userId")
+	if len(id) == 0 {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Found no userID"})
+		return
+	}
+	spots, err := s.Repo.GetAllSpots(c, id)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	var markers []common.Marker
+	for _, spot := range *spots {
+		markers = append(markers, spot.Marker)
+	}
+
+	c.IndentedJSON(http.StatusOK, markers)
 }
 
 func (s Service) GetSpotByID(c *gin.Context) {
@@ -43,10 +74,14 @@ func (s Service) GetSpotByID(c *gin.Context) {
 		c.JSON(http.StatusNotFound, gin.H{"error": "Found no userID or spotId"})
 		return
 	}
-	spots := s.Repo.GetAllSpots(c, userId)
+	spots, err := s.Repo.GetAllSpots(c, userId)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
 
-	for _, spot := range spots.Fish_spots {
-		if strings.Compare(spot.ID, spotId) == 0 {
+	for _, spot := range *spots {
+		if strings.Compare(spot.Id, spotId) == 0 {
 			c.IndentedJSON(http.StatusOK, spot)
 			return
 		}

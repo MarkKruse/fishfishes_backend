@@ -5,9 +5,8 @@ type Fish_spots struct {
 }
 
 type Fish_spot struct {
-	ID      string  `json:"id"`
-	LAT     float64 `json:"lat"`
-	LNG     float64 `json:"lng"`
+	Id      string  `json:"id"`
+	Marker  Marker  `json:"marker"`
 	Catches []Catch `json:"catches"`
 }
 

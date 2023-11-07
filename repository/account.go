@@ -16,10 +16,6 @@ type UserEntity struct {
 	Password string `bson:"password"`
 }
 
-func (r Repo) InstallIndexes() error {
-	return nil
-}
-
 func (r Repo) CreateAccount(ctx context.Context, user common.User) error {
 
 	userEntity := UserEntity{

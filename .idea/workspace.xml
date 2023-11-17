@@ -6,8 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="fffba33d-8984-46ad-ad61-d50be63de5bc" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/marker.go" beforeDir="false" afterPath="$PROJECT_DIR$/common/marker.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/repository/repository.go" beforeDir="false" afterPath="$PROJECT_DIR$/repository/repository.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/service/service.go" beforeDir="false" afterPath="$PROJECT_DIR$/service/service.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ff-darwin-amd64" beforeDir="false" afterPath="$PROJECT_DIR$/target/ff-darwin-amd64" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ff-linux-amd64" beforeDir="false" afterPath="$PROJECT_DIR$/target/ff-linux-amd64" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/ff-windows-amd64.exe" beforeDir="false" afterPath="$PROJECT_DIR$/target/ff-windows-amd64.exe" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +111,7 @@
       <workItem from="1698776439982" duration="3077000" />
       <workItem from="1698915342075" duration="15692000" />
       <workItem from="1699274998912" duration="799000" />
-      <workItem from="1699349531809" duration="10117000" />
+      <workItem from="1699349531809" duration="23850000" />
     </task>
     <servers />
   </component>
@@ -126,21 +131,5 @@
   </component>
   <component name="VgoProject">
     <settings-migrated>true</settings-migrated>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/service/service.go</url>
-          <line>99</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DlvLineBreakpoint">
-          <url>file://$PROJECT_DIR$/main.go</url>
-          <line>42</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

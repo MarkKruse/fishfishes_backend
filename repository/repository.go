@@ -19,50 +19,17 @@ type SpotEntity struct {
 const Spot string = "spot"
 
 // albums slice to seed record album data.
-var spots = common.Fish_spots{
-	Fish_spots: []common.Fish_spot{
-		{
-			Id: "12345",
-			Marker: common.Marker{
-				Title: "title1",
-				Coordinates: common.Coordinates{
-					Latitude:  54.110943,
-					Longitude: 6.713647,
-				},
-			},
-			Catches: []common.Catch{
-				{
-					Fish:      "",
-					Number:    1,
-					Size:      80.45,
-					Deep:      500,
-					Time:      "Morning",
-					Equipment: common.Equipment{Name: "Angel 1"},
-				},
-			},
-		},
-		{
-			Id: "12345",
-			Marker: common.Marker{
-				Title: "title2",
-				Coordinates: common.Coordinates{
-					Latitude:  55.078367,
-					Longitude: 7.809639,
-				},
-			},
-			Catches: []common.Catch{
-				{
-					Fish:      "",
-					Number:    1,
-					Size:      80.45,
-					Deep:      500,
-					Time:      "Morning",
-					Equipment: common.Equipment{Name: "Angel 3"},
-				},
-			},
-		},
-	},
+var fishListSaltwWater = []string{
+	"Sword Fish", "Atlantic Cod", "Mackerel",
+	"Trout", "Atlantic Salmon", "Tuna", "Shark",
+	"Red Mullet", "Barramundi", "Mahi-Mahi", "Anchovy", "Haddock", "Red Seabream Fish", "Gold Line Fish",
+	"Pollack", "Ocean Sunfish", "Northern Red Snapper", "Bonito", "Bluefish",
 }
+
+var fishListFreshWater = []string{
+	"Common Carp", "Oscar Fish", "Wels Catfish", "Sauger Fish", "The Northern Pike", "Tench", "European Eel", "Cisco Fish", "Black Crappie",
+	"Brown Bullhead Catfish", "Golden Shiner", "Largemouth Bass", "Fathead Minnow", "Walleye Fish", "Common Dace",
+	"European Chub", "", "", "", "", ""}
 
 type Repo struct {
 	db *mongo.Database
@@ -136,4 +103,12 @@ func (r Repo) SaveSpot(ctx context.Context, userId string, spot common.Fish_spot
 	}
 
 	return nil
+}
+
+func (r Repo) GetFishListSalt() []string {
+	return fishListSaltwWater
+}
+
+func (r Repo) GetFishListFresh() []string {
+	return fishListFreshWater
 }

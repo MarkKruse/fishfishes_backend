@@ -14,6 +14,8 @@ type Repo interface {
 	CreateAccount(ctx context.Context, user common.User) error
 	SaveSpot(ctx context.Context, userId string, spot common.Fish_spot) error
 	GetAllSpots(ctx context.Context, id string) (*[]common.Fish_spot, error)
+	GetFishListSalt() []string
+	GetFishListFresh() []string
 }
 
 const VERSION string = "0.0.1"
@@ -61,7 +63,8 @@ func (s Service) GetAllSpotCoordinates(c *gin.Context) {
 
 	var markers []common.Marker
 	for _, spot := range *spots {
-		markers = append(markers, spot.Marker)
+		marker := common.Marker{Id: spot.Id, Title: spot.Marker.Title, Coordinates: spot.Marker.Coordinates}
+		markers = append(markers, marker)
 	}
 
 	c.IndentedJSON(http.StatusOK, markers)
@@ -112,4 +115,12 @@ func (s Service) SaveSpot(c *gin.Context) {
 
 	// Return response with updated user data
 	c.JSON(http.StatusOK, gin.H{"status": "saved"})
+}
+
+func (s Service) GetFishListSalt(c *gin.Context) {
+	c.IndentedJSON(http.StatusOK, s.Repo.GetFishListSalt())
+}
+
+func (s Service) GetFishListFresh(c *gin.Context) {
+	c.IndentedJSON(http.StatusOK, s.Repo.GetFishListFresh())
 }
